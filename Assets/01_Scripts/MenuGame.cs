@@ -11,15 +11,20 @@ public class MenuGame : MonoBehaviour
     
     void Start()
     {
+        Time.timeScale = 0.25f;
         ispause = true;
     }
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) {
             ispause = false;
-        if (Input.GetMouseButtonUp(0))
+            Time.timeScale = 1f;
+        }
+        if (Input.GetMouseButtonUp(0)) {
             ispause = true;
+            Time.timeScale = 0.25f;
+        }
         Player.GetComponent<Player>().ispause = ispause;
         Pause.SetActive(ispause);
     }

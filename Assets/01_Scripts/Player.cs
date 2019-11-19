@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Rigidbody tir;
+    public float speedTir;
+    public float reload;
     public bool ispause;
 
     void Start()
     {
-        
+        speedTir = 10f;
+        reload = 0.5f;
+        StartCoroutine(Fire());
     }
     
     void Update()
@@ -26,5 +31,13 @@ public class Player : MonoBehaviour
                     transform.position += new Vector3(0, -0.025f, 0);
             }
         }
+    }
+
+    IEnumerator Fire()
+    {
+        Rigidbody t = Instantiate(tir, new Vector3(transform.position.x + 0.05f, transform.position.y - 1f, transform.position.z - 0.065f), Quaternion.Euler(-90, 0, 0));
+        t.velocity = transform.up * speedTir;
+        yield return new WaitForSeconds(reload);
+        StartCoroutine(Fire());
     }
 }
