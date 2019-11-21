@@ -37,7 +37,7 @@ public class MenuGame : MonoBehaviour
     void Update()
     {
         // Check if the game is in pause
-        if ((Input.mousePosition.x <= menu.transform.position.x - 15 || Input.mousePosition.x >= menu.transform.position.x + 15) && (Input.mousePosition.y <= menu.transform.position.y - 15 || Input.mousePosition.y >= menu.transform.position.y + 15)) {
+        if ((Input.mousePosition.x <= menu.transform.position.x - 15 || Input.mousePosition.x >= menu.transform.position.x + 15) && (Input.mousePosition.y <= menu.transform.position.y - 15 || Input.mousePosition.y >= menu.transform.position.y + 15) && !player.GetComponent<Player>().finish) {
             if (Input.GetMouseButtonDown(0)) {
                 ispause = false;
                 Time.timeScale = 1f;
