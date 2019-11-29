@@ -9,13 +9,12 @@ public class Niveau : MonoBehaviour
 
     void Start()
     {
-        
     }
     
     void Update()
     {
         ispause = menuGame.GetComponent<MenuGame>().ispause;
         if (!ispause)
-            transform.position += new Vector3(0, -0.01f, 0);
+            transform.position += new Vector3(0, -0.02f, 0);
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ennemi
   - EndGame
+  - HP
+  - AttackSpeed
+  - Shield
   layers:
   - Default
   - TransparentFX

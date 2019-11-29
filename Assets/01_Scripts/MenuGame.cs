@@ -63,6 +63,12 @@ public class MenuGame : MonoBehaviour
 
     public void Menu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("EFE_menu");
     }
+
+    // Show FPS
+    /*void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
+    }*/
 }
