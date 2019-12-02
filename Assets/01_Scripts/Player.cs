@@ -8,12 +8,14 @@ public class Player : MonoBehaviour
 {
     public GameObject shield;
     public Rigidbody tir;
+    public Texture[] sprite;
     public float speedTir;
     public float reload;
     public int hit;
     public int hp;
     public bool finish;
     public bool ispause;
+    private float count;
     private bool isdead;
     private bool isAttackSpeed;
 
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
         reload = 0.5f;
         hit = 5;
         hp = 3;
+        count = 0;
         isdead = false;
         finish = false;
         isAttackSpeed = false;
@@ -31,6 +34,9 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        if (count > 0)
+            count -= Time.deltaTime;
+
         // Check if it live
         if (hp <= 0) {
             isdead = true;
@@ -84,6 +90,7 @@ public class Player : MonoBehaviour
             case "AttackSpeed":
                 if (!isAttackSpeed) {
                     isAttackSpeed = true;
+                    count = 5;
                     StartCoroutine(AttackSpeed());
                 }
                 break;
@@ -121,5 +128,16 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene("EFE_menu");
+    }
+
+    private void OnGUI()
+    {
+        GUI.backgroundColor = new Color(0, 0, 0, 0);
+        GUI.skin.box.fontSize = 30;
+        if (isAttackSpeed && !ispause) {
+            GUI.DrawTexture(new Rect(20, 20, 40, 40), sprite[0]);
+            GUI.color = new Color(0, 0, 0, 1f);
+            GUI.Box(new Rect(70, 20, 80, 40), count.ToString("0.00"));
+        }
     }
 }

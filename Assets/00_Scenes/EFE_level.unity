@@ -3414,6 +3414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: {fileID: 99690159}
   tir: {fileID: 600016996, guid: ac702b8560ad46040b3bd20d2cc67e3a, type: 3}
+  sprite:
+  - {fileID: 2800000, guid: 3be43e8774fbc644f920d9c8fb26824f, type: 3}
+  - {fileID: 2800000, guid: 5b7a12a1d668d0b46bfbfe688990e001, type: 3}
   speedTir: 0
   reload: 0
   hit: 0
