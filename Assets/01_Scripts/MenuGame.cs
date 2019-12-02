@@ -67,8 +67,8 @@ public class MenuGame : MonoBehaviour
     }
 
     // Show FPS
-    /*void OnGUI()
+    void OnGUI()
     {
         GUI.Label(new Rect(0, 0, 100, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
-    }*/
+    }
 }

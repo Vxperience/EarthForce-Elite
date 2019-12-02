@@ -44,22 +44,22 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
                 if (hit.point.x > transform.position.x && hit.point.x - 0.1 > transform.position.x && transform.position.x <= 2 && transform.position.x + 0.1 <= 2)
-                    transform.position += new Vector3(0.035f, 0, 0);
+                    transform.position += new Vector3(2 * Time.deltaTime, 0, 0);
                 else if (hit.point.x < transform.position.x && hit.point.x + 0.1 < transform.position.x && transform.position.x >= -2 &&  transform.position.x - 0.1 >= -2)
-                    transform.position += new Vector3(-0.035f, 0, 0);
+                    transform.position += new Vector3(-2 * Time.deltaTime, 0, 0);
                 if (hit.point.y + 2 > transform.position.y && hit.point.y + 1.9 > transform.position.y)
-                    transform.position += new Vector3(0, 0.035f, 0);
+                    transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
                 else if (hit.point.y - 2 < transform.position.y && hit.point.y + 2.1 < transform.position.y)
-                    transform.position += new Vector3(0, -0.035f, 0);
+                    transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
             }
         }
 
         // Manage Endgame
         if (finish) {
             if (!isdead)
-                transform.position += new Vector3(0, 0.04f, 0);
+                transform.position += new Vector3(0, 4 * Time.deltaTime, 0);
             else
-                transform.position += new Vector3(0, -0.01f, 0);
+                transform.position += new Vector3(0, -1 * Time.deltaTime, 0);
         }
     }
 

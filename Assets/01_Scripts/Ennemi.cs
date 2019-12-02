@@ -29,7 +29,7 @@ public class Ennemi : MonoBehaviour
             }
         } else if (gameObject.name.Contains("moto")) {
             if (transform.position.y < 7 && !ispause)
-                transform.position += new Vector3(0, -0.06f, 0);
+                transform.position += new Vector3(0, -4 * Time.deltaTime, 0);
         } else if (gameObject.name.Contains("lanceur")) {
             if (transform.position.y < 7 && !firstfire) {
                 StartCoroutine(Fire(5, 4f));

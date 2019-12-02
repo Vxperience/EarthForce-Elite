@@ -45,6 +45,8 @@ MonoBehaviour:
   - {fileID: 8984821122761009236, guid: 8303dfea18eb5184d9a4dc3c7141bf84, type: 3}
   - {fileID: 9216751668590869042, guid: 1028d1e11cf230e4b842b9cf81a410aa, type: 3}
   - {fileID: 8093762673758532907, guid: 1a189f2c37d7bca4491e45ed80341b56, type: 3}
+  explosion: {fileID: 7475611781578499417, guid: fabbecb17baefed48b755618cbe9e37d,
+    type: 3}
 --- !u!1001 &5454340497718742734
 PrefabInstance:
   m_ObjectHideFlags: 0

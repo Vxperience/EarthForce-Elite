@@ -15,6 +15,6 @@ public class Niveau : MonoBehaviour
     {
         ispause = menuGame.GetComponent<MenuGame>().ispause;
         if (!ispause)
-            transform.position += new Vector3(0, -0.02f, 0);
+            transform.position += new Vector3(0, -1.5f * Time.deltaTime, 0);
     }
 }

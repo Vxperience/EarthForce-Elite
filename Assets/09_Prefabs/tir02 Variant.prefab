@@ -41,6 +41,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7066718a91e09545bc8fbece21f7fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUp: []
+  explosion: {fileID: 7475611781578499417, guid: fabbecb17baefed48b755618cbe9e37d,
+    type: 3}
 --- !u!1001 &6948497791967482577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,7 +54,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 74e344d12bb4ae94498bfafa211ca3ab,
         type: 3}
       propertyPath: m_Name
-      value: tir02
+      value: tir02 Variant
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 74e344d12bb4ae94498bfafa211ca3ab,
         type: 3}
