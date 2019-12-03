@@ -16,6 +16,7 @@ public class MenuGame : MonoBehaviour
     
     void Start()
     {
+        // Select wich level to launch
         switch (PlayerPrefs.GetInt("Niveau")) {
             case 0:
                 niveau[0].SetActive(true);
@@ -30,6 +31,8 @@ public class MenuGame : MonoBehaviour
                 niveau[3].SetActive(true);
                 break;
         }
+
+        // Initialized the pause to true and pause the game
         Time.timeScale = 0f;
         ispause = true;
     }
@@ -69,6 +72,7 @@ public class MenuGame : MonoBehaviour
     // Show FPS
     void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 100, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
+        if (PlayerPrefs.GetInt("FPS") == 1)
+            GUI.Label(new Rect(0, 0, 100, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
     }
 }

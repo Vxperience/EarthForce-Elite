@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public GameObject shield;
     public Rigidbody tir;
+    public GameObject explosion;
     public Texture[] sprite;
     public float speedTir;
     public float reload;
@@ -15,25 +16,36 @@ public class Player : MonoBehaviour
     public int hp;
     public bool finish;
     public bool ispause;
+    private GameObject tirAudio;
     private float count;
     private bool isdead;
+    private bool explode;
     private bool isAttackSpeed;
+    private bool isAudio;
 
     void Start()
     {
+        // Initialise the player
+        tirAudio = new GameObject("TirAudio");
+        tirAudio.transform.parent = gameObject.transform;
+        tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<Audio>().lightFire[4];
+
         speedTir = 10f;
         reload = 0.5f;
         hit = 5;
         hp = 3;
         count = 0;
         isdead = false;
+        explode = false;
         finish = false;
         isAttackSpeed = false;
+        isAudio = PlayerPrefs.GetInt("isAudio") == 1 ? true : false;
         StartCoroutine(Fire());
     }
     
     void Update()
     {
+        // Decrease the counter of the AttackSpeed power-up
         if (count > 0)
             count -= Time.deltaTime;
 
@@ -64,13 +76,21 @@ public class Player : MonoBehaviour
         if (finish) {
             if (!isdead)
                 transform.position += new Vector3(0, 4 * Time.deltaTime, 0);
-            else
+            else {
+                if (!explode) {
+                    Instantiate(explosion, new Vector3(transform.position.x + 0.3f, transform.position.y - 1, transform.position.z), Quaternion.Euler(0, 0, 0), transform);
+                    explode = true;
+                }
                 transform.position += new Vector3(0, -1 * Time.deltaTime, 0);
+            }
         }
     }
 
     IEnumerator Fire()
     {
+        // Manage fire of the player
+        if (isAudio)
+            tirAudio.GetComponent<AudioSource>().Play();
         Rigidbody t = Instantiate(tir, new Vector3(transform.position.x + 0.05f, transform.position.y - 1f, transform.position.z - 0.065f), Quaternion.Euler(-90, 0, 0));
         t.velocity = transform.up * speedTir;
         yield return new WaitForSeconds(reload);
@@ -98,10 +118,27 @@ public class Player : MonoBehaviour
                 shield.SetActive(true);
                 break;
             default:
-                if (shield.activeSelf)
+                if (shield.activeSelf) {
+                    if (collision.gameObject.tag == "Ennemi") {
+                        if (collision.gameObject.name.Contains("pick-up"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x + 0.3f, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                        if (collision.gameObject.name.Contains("moto"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                        if (collision.gameObject.name.Contains("lanceur"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x + 0.3f, collision.transform.position.y + 0.2f, collision.transform.position.z), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                    }
                     shield.SetActive(false);
-                else
+                } else {
+                    if (collision.gameObject.tag == "Ennemi") {
+                        if (collision.gameObject.name.Contains("pick-up"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x + 0.3f, collision.transform.position.y + 0.5f, collision.transform.position.z - 1), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                        if (collision.gameObject.name.Contains("moto"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                        if (collision.gameObject.name.Contains("lanceur"))
+                            Instantiate(explosion, new Vector3(collision.transform.position.x + 0.3f, collision.transform.position.y + 0.2f, collision.transform.position.z), Quaternion.Euler(0, 0, 0), collision.transform.parent);
+                    }
                     hp--;
+                }
                 break;
         }
         Destroy(collision.gameObject);
@@ -109,6 +146,7 @@ public class Player : MonoBehaviour
 
     IEnumerator AttackSpeed()
     {
+        // Give the AttackSpeed boost
         reload *= 0.5f;
         yield return new WaitForSeconds(5);
         reload *= 2;
@@ -117,6 +155,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Detect the Endgame
         if (other.tag == "EndGame") {
             finish = true;
             GameObject.Find("Fin").GetComponent<Text>().text = "Victory";
@@ -126,18 +165,20 @@ public class Player : MonoBehaviour
 
     IEnumerator Finish()
     {
+        // Return to menu
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene("EFE_menu");
     }
 
     private void OnGUI()
     {
+        // Show the remaining time of the AttackSpeed power-up
         GUI.backgroundColor = new Color(0, 0, 0, 0);
-        GUI.skin.box.fontSize = 30;
+        GUI.skin.box.fontSize = 120;
         if (isAttackSpeed && !ispause) {
-            GUI.DrawTexture(new Rect(20, 20, 40, 40), sprite[0]);
+            GUI.DrawTexture(new Rect(20, 20, 160, 160), sprite[0]);
             GUI.color = new Color(0, 0, 0, 1f);
-            GUI.Box(new Rect(70, 20, 80, 40), count.ToString("0.00"));
+            GUI.Box(new Rect(190, 20, 320, 160), count.ToString("0.00"));
         }
     }
 }

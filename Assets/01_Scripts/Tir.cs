@@ -13,6 +13,7 @@ public class Tir : MonoBehaviour
 
     void Start()
     {
+        // Initialise the shot
         anchor = GameObject.Find("Décor");
         player = GameObject.Find("CharLeclerc");
         hit = player.GetComponent<Player>().hit;
@@ -22,11 +23,15 @@ public class Tir : MonoBehaviour
     void Update()
     {
         ispause = player.GetComponent<Player>().ispause;
+
+        // if it's shot by a "lanceur" the missile have to follow the player
         if (gameObject.name.Contains("tir02") && !ispause) {
-            if (player.transform.position.x < transform.position.x)
-                transform.position += new Vector3(-0.8f * Time.deltaTime, 0, 0);
-            else if (player.transform.position.x > transform.position.x)
-                transform.position += new Vector3(0.8f * Time.deltaTime, 0, 0);
+            if (player.transform.position.y < transform.position.y) {
+                if (player.transform.position.x < transform.position.x)
+                    transform.position += new Vector3(-0.8f * Time.deltaTime, 0, 0);
+                else if (player.transform.position.x > transform.position.x)
+                    transform.position += new Vector3(0.8f * Time.deltaTime, 0, 0);
+            }
         }
 
         // Destroy the shoot if its out of the screen
@@ -36,6 +41,7 @@ public class Tir : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Manage collision of the shot
         if (collision.transform.tag == "Ennemi") {
             collision.transform.gameObject.GetComponent<Ennemi>().hp -= hit;
             if (collision.transform.gameObject.GetComponent<Ennemi>().hp <= 0) {
