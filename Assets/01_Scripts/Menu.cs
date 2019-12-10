@@ -19,6 +19,8 @@ public class Menu : MonoBehaviour
         // Initialise the menu
         niveauToLoad = -1;
         isOption = false;
+        if (PlayerPrefs.GetInt("Progression") == 0)
+            PlayerPrefs.SetInt("Progression", 1);
     }
     
     void Update()
@@ -35,9 +37,12 @@ public class Menu : MonoBehaviour
             } else {
                 if (i == 0)
                     niveau[i].GetComponent<Image>().sprite = icon[2];
-                else {
+                else if (i <= PlayerPrefs.GetInt("Progression")) {
                     niveau[i].GetComponent<Image>().sprite = icon[0];
                     niveau[i].GetComponentInChildren<Text>().color = new Color(25, 119, 151);
+                } else {
+                    niveau[i].GetComponent<Image>().sprite = icon[4];
+                    niveau[i].GetComponentInChildren<Text>().text = "";
                 }
             }
         }
@@ -61,17 +66,27 @@ public class Menu : MonoBehaviour
     public void ChangeNiveauToLoad(int niveau)
     {
         // Click on an icon to change the level to charge
-        niveauToLoad = niveau;
+        if (PlayerPrefs.GetInt("Progression") >= niveau)
+            niveauToLoad = niveau;
     }
 
     public void LaunchGame()
     {
         // Launch the Level scene with the good level
-        if (niveauToLoad >= 0 && niveauToLoad <= 3)
-        {
+        if (niveauToLoad >= 0) {
             Debug.Log(niveauToLoad);
             PlayerPrefs.SetInt("Niveau", niveauToLoad);
             SceneManager.LoadScene("EFE_level");
         }
+    }
+
+    public void Quitter()
+    {
+        // Quit EarthFoce Elite
+        PlayerPrefs.DeleteKey("Progression");
+        PlayerPrefs.DeleteKey("Niveau");
+        PlayerPrefs.DeleteKey("isAudio");
+        PlayerPrefs.DeleteKey("FPS");
+        SceneManager.LoadScene(1);
     }
 }

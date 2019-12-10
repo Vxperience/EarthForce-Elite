@@ -56,6 +56,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tir02 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 74e344d12bb4ae94498bfafa211ca3ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fire
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 74e344d12bb4ae94498bfafa211ca3ab,
         type: 3}
       propertyPath: m_LocalPosition.x

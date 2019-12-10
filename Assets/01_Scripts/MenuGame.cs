@@ -72,7 +72,8 @@ public class MenuGame : MonoBehaviour
     // Show FPS
     void OnGUI()
     {
+        GUI.skin.label.fontSize = 40;
         if (PlayerPrefs.GetInt("FPS") == 1)
-            GUI.Label(new Rect(0, 0, 100, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
+            GUI.Label(new Rect(0, 0, 400, 50), "FPS: " + (int)(1.0f / Time.smoothDeltaTime));
     }
 }

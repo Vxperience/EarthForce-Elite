@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
                 transform.position += new Vector3(0, 4 * Time.deltaTime, 0);
             else {
                 if (!explode) {
-                    Instantiate(explosion, new Vector3(transform.position.x + 0.3f, transform.position.y - 1, transform.position.z), Quaternion.Euler(0, 0, 0), transform);
+                    Instantiate(explosion, new Vector3(transform.position.x + 0.05f, transform.position.y - 1.5f, transform.position.z), Quaternion.Euler(0, 0, 0), transform);
                     explode = true;
                 }
                 transform.position += new Vector3(0, -1 * Time.deltaTime, 0);
@@ -159,6 +159,10 @@ public class Player : MonoBehaviour
         if (other.tag == "EndGame") {
             finish = true;
             GameObject.Find("Fin").GetComponent<Text>().text = "Victory";
+            if (GameObject.Find("Niveau1") && PlayerPrefs.GetInt("Progression") < 2)
+                PlayerPrefs.SetInt("Progression", 2);
+            if (GameObject.Find("Niveau2") && PlayerPrefs.GetInt("Progression") < 3)
+                PlayerPrefs.SetInt("Progression", 3);
             StartCoroutine(Finish());
         }
     }

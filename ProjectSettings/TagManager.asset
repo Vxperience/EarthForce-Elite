@@ -9,6 +9,7 @@ TagManager:
   - HP
   - AttackSpeed
   - Shield
+  - Fire
   layers:
   - Default
   - TransparentFX

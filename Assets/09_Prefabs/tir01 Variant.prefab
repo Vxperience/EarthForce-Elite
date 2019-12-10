@@ -64,6 +64,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6f4df81a708048e4a91573bd6b6aa01e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Fire
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6f4df81a708048e4a91573bd6b6aa01e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -26,7 +26,7 @@ public class Tir : MonoBehaviour
 
         // if it's shot by a "lanceur" the missile have to follow the player
         if (gameObject.name.Contains("tir02") && !ispause) {
-            if (player.transform.position.y < transform.position.y) {
+            if (player.transform.position.y - 2 < transform.position.y) {
                 if (player.transform.position.x < transform.position.x)
                     transform.position += new Vector3(-0.8f * Time.deltaTime, 0, 0);
                 else if (player.transform.position.x > transform.position.x)
@@ -42,16 +42,21 @@ public class Tir : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Manage collision of the shot
-        if (collision.transform.tag == "Ennemi") {
-            collision.transform.gameObject.GetComponent<Ennemi>().hp -= hit;
-            if (collision.transform.gameObject.GetComponent<Ennemi>().hp <= 0) {
-                int rand = Random.Range(0, 100);
-                if (rand > 10 && rand < 30)
-                    Instantiate(powerUp[Random.Range(0, powerUp.Length)], new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z - 0.75f), Quaternion.Euler(0, 180, 0), GameObject.Find("Ennemi").transform);
-                Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0), anchor.transform);
-                Destroy(collision.transform.gameObject);
+        if (collision.transform.tag != "Fire")
+        {
+            if (collision.transform.tag == "Ennemi")
+            {
+                collision.transform.gameObject.GetComponent<Ennemi>().hp -= hit;
+                if (collision.transform.gameObject.GetComponent<Ennemi>().hp <= 0)
+                {
+                    int rand = Random.Range(0, 100);
+                    if (rand > 10 && rand < 30)
+                        Instantiate(powerUp[Random.Range(0, powerUp.Length)], new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z - 0.75f), Quaternion.Euler(0, 180, 0), GameObject.Find("Ennemi").transform);
+                    Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0), anchor.transform);
+                    Destroy(collision.transform.gameObject);
+                }
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
