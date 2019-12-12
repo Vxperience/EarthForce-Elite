@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EndlessGame : MonoBehaviour
+public class EFE_EndlessGame : MonoBehaviour
 {
     public GameObject niveau;
     public GameObject[] map;
@@ -15,7 +14,7 @@ public class EndlessGame : MonoBehaviour
         for (int i = 0; i < 2; i++) {
             // Map
             newMap = Instantiate(map[Random.Range(0, map.Length)], new Vector3(4.25f, i * 10, 3), Quaternion.Euler(-90, 0, 0), niveau.GetComponent<Transform>().Find("Décor").transform);
-            newMap.AddComponent<DestroyMap>();
+            newMap.AddComponent<EFE_DestroyMap>();
 
             // Ennemi
             if (i != 0) {
@@ -64,7 +63,7 @@ public class EndlessGame : MonoBehaviour
         if (transform.position.y <= 20) {
             // Map
             newMap = Instantiate(map[Random.Range(0, map.Length)], new Vector3(4.25f, 20, 3), Quaternion.Euler(-90, 0, 0), niveau.GetComponent<Transform>().Find("Décor").transform);
-            newMap.AddComponent<DestroyMap>();
+            newMap.AddComponent<EFE_DestroyMap>();
 
             // Ennemi
             List<float> listEnnemiPosX = new List<float>(); // contains coordonate of the ennemi initialized

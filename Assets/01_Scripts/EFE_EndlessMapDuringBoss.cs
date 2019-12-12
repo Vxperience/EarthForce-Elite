@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EndlessMapDuringBoss : MonoBehaviour
+public class EFE_EndlessMapDuringBoss : MonoBehaviour
 {
     public GameObject map;
     public float posy;
@@ -20,7 +18,7 @@ public class EndlessMapDuringBoss : MonoBehaviour
         if (transform.position.y < posy) {
             // Map
             newMap = Instantiate(map, new Vector3(4.25f, posy + 10, 3), Quaternion.Euler(-90, 0, 0), niveau.transform);
-            newMap.AddComponent<DestroyMap>();
+            newMap.AddComponent<EFE_DestroyMap>();
 
             transform.position += new Vector3(0, 10, 0);
         }

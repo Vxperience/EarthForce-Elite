@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Menu : MonoBehaviour
+public class EFE_Menu : MonoBehaviour
 {
     public GameObject[] niveau;
     public GameObject option;
@@ -74,7 +72,6 @@ public class Menu : MonoBehaviour
     {
         // Launch the Level scene with the good level
         if (niveauToLoad >= 0) {
-            Debug.Log(niveauToLoad);
             PlayerPrefs.SetInt("Niveau", niveauToLoad);
             SceneManager.LoadScene("EFE_level");
         }

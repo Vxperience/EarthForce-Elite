@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Ennemi : MonoBehaviour
+public class EFE_Ennemi : MonoBehaviour
 {
     public Rigidbody tir;
     public int hp;
@@ -21,18 +20,18 @@ public class Ennemi : MonoBehaviour
         hp = 10;
         menuGame = GameObject.Find("MenuGame");
         firstfire = false;
-        ispause = menuGame.GetComponent<MenuGame>().ispause;
+        ispause = menuGame.GetComponent<EFE_MenuGame>().ispause;
         isAudio = PlayerPrefs.GetInt("isAudio") == 1 ? true : false;
     }
     
     void Update()
     {
-        ispause = menuGame.GetComponent<MenuGame>().ispause;
+        ispause = menuGame.GetComponent<EFE_MenuGame>().ispause;
 
         // Manage the comportement of the ennemi
         if (gameObject.name.Contains("pick-up")) {
             if (transform.position.y < 7 && !firstfire) {
-                tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<Audio>().lightFire[3];
+                tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<EFE_Audio>().lightFire[3];
                 StartCoroutine(Fire(3, 10f));
                 firstfire = true;
             }
@@ -41,7 +40,7 @@ public class Ennemi : MonoBehaviour
                 transform.position += new Vector3(0, -4 * Time.deltaTime, 0);
         } else if (gameObject.name.Contains("lanceur")) {
             if (transform.position.y < 7 && !firstfire) {
-                tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<Audio>().heavyFire[0];
+                tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<EFE_Audio>().heavyFire[0];
                 StartCoroutine(Fire(5, 4f));
                 firstfire = true;
             }

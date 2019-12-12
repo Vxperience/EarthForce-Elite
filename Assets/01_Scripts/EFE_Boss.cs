@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class EFE_Boss : MonoBehaviour
 {
     public GameObject endGame;
     public GameObject explosion;
@@ -69,9 +68,9 @@ public class Boss : MonoBehaviour
     {
         // Manage collision
         if (collision.gameObject.name == "CharLeclerc")
-            player.GetComponent<Player>().hp -= 3;
+            player.GetComponent<EFE_Player>().hp -= 3;
         if (part == 0) {
-            hp -= player.GetComponent<Player>().hit;
+            hp -= player.GetComponent<EFE_Player>().hit;
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Audio : MonoBehaviour
+public class EFE_Audio : MonoBehaviour
 {
     public AudioClip theme;
     public AudioClip[] ambiance;

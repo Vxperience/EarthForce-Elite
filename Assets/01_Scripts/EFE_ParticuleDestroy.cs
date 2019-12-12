@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticuleDestroy : MonoBehaviour
+public class EFE_ParticuleDestroy : MonoBehaviour
 {
     private bool isAudio;
 

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Tir : MonoBehaviour
+public class EFE_Tir : MonoBehaviour
 {
     public GameObject[] powerUp;
     public GameObject explosion;
@@ -16,13 +14,13 @@ public class Tir : MonoBehaviour
         // Initialise the shot
         anchor = GameObject.Find("Décor");
         player = GameObject.Find("CharLeclerc");
-        hit = player.GetComponent<Player>().hit;
-        ispause = player.GetComponent<Player>().ispause;
+        hit = player.GetComponent<EFE_Player>().hit;
+        ispause = player.GetComponent<EFE_Player>().ispause;
     }
     
     void Update()
     {
-        ispause = player.GetComponent<Player>().ispause;
+        ispause = player.GetComponent<EFE_Player>().ispause;
 
         // if it's shot by a "lanceur" the missile have to follow the player
         if (gameObject.name.Contains("tir02") && !ispause) {
@@ -46,8 +44,8 @@ public class Tir : MonoBehaviour
         {
             if (collision.transform.tag == "Ennemi")
             {
-                collision.transform.gameObject.GetComponent<Ennemi>().hp -= hit;
-                if (collision.transform.gameObject.GetComponent<Ennemi>().hp <= 0)
+                collision.transform.gameObject.GetComponent<EFE_Ennemi>().hp -= hit;
+                if (collision.transform.gameObject.GetComponent<EFE_Ennemi>().hp <= 0)
                 {
                     int rand = Random.Range(0, 100);
                     if (rand > 10 && rand < 30)

@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class EFE_Player : MonoBehaviour
 {
     public GameObject shield;
     public Rigidbody tir;
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
         // Initialise the player
         tirAudio = new GameObject("TirAudio");
         tirAudio.transform.parent = gameObject.transform;
-        tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<Audio>().lightFire[4];
+        tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<EFE_Audio>().lightFire[4];
 
         speedTir = 10f;
         reload = 0.5f;
@@ -169,7 +168,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Finish()
     {
-        // Return to menu
+        // Return to menu afer 5 second
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene("EFE_menu");
     }

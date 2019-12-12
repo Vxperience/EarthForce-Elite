@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuGame : MonoBehaviour
+public class EFE_MenuGame : MonoBehaviour
 {
     public GameObject[] niveau;
     public GameObject player;
@@ -40,7 +38,7 @@ public class MenuGame : MonoBehaviour
     void Update()
     {
         // Check if the game is in pause
-        if ((Input.mousePosition.x <= menu.transform.position.x - 15 || Input.mousePosition.x >= menu.transform.position.x + 15) && (Input.mousePosition.y <= menu.transform.position.y - 15 || Input.mousePosition.y >= menu.transform.position.y + 15) && !player.GetComponent<Player>().finish) {
+        if ((Input.mousePosition.x <= menu.transform.position.x - 15 || Input.mousePosition.x >= menu.transform.position.x + 15) && (Input.mousePosition.y <= menu.transform.position.y - 15 || Input.mousePosition.y >= menu.transform.position.y + 15) && !player.GetComponent<EFE_Player>().finish) {
             if (Input.GetMouseButtonDown(0)) {
                 ispause = false;
                 Time.timeScale = 1f;
@@ -50,13 +48,13 @@ public class MenuGame : MonoBehaviour
                 Time.timeScale = 0f;
             }
         }
-        player.GetComponent<Player>().ispause = ispause;
+        player.GetComponent<EFE_Player>().ispause = ispause;
         pause.SetActive(ispause);
 
         // Manage the pause menu
         if (ispause) {
             for (int i = 0; i < hp.Length; i++) {
-                if (player.GetComponent<Player>().hp >= i + 1)
+                if (player.GetComponent<EFE_Player>().hp >= i + 1)
                     hp[i].GetComponent<Image>().sprite = spriteHp[0];
                 else
                     hp[i].GetComponent<Image>().sprite = spriteHp[1];

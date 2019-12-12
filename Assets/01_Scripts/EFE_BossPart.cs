@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BossPart : MonoBehaviour
+public class EFE_BossPart : MonoBehaviour
 {
     public GameObject boss;
     public GameObject explosion;
@@ -30,14 +29,14 @@ public class BossPart : MonoBehaviour
     {
         // Check if it start fire
         if (transform.position.y < 7 && !firstfire) {
-            tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<Audio>().lightFire[3];
+            tirAudio.AddComponent<AudioSource>().clip = GameObject.Find("Audio").GetComponent<EFE_Audio>().lightFire[3];
             StartCoroutine(Fire(reload, speedTir));
             firstfire = true;
         }
 
         // Check if it lives
         if (hp <= 0) {
-            boss.GetComponent<Boss>().part--;
+            boss.GetComponent<EFE_Boss>().part--;
             Instantiate(explosion, new Vector3(transform.position.x + pos[0], transform.position.y + pos[1], transform.position.z + pos[2]), Quaternion.Euler(0, 0, 0), boss.transform);
             Destroy(gameObject);
         }
@@ -78,9 +77,9 @@ public class BossPart : MonoBehaviour
     {
         // Manage collision
         if (!collision.gameObject.name.Contains("Boss")) {
-            hp -= player.GetComponent<Player>().hit;
+            hp -= player.GetComponent<EFE_Player>().hit;
             if (collision.gameObject.name == "CharLeclerc")
-                player.GetComponent<Player>().hp -= 3;
+                player.GetComponent<EFE_Player>().hp -= 3;
         }
     }
 }

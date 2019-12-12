@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DestroyMap : MonoBehaviour
+public class EFE_DestroyMap : MonoBehaviour
 {
     void Update()
     {
